@@ -1,3 +1,5 @@
+import 'package:flipkart_clone/core/constant/app_color.dart' show AppColors;
+import 'package:flipkart_clone/core/widgets/custom_cache_image.dart';
 import 'package:flipkart_clone/model/home_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -20,63 +22,80 @@ class ProductWidget extends StatelessWidget {
     ];
 
     return SizedBox(
-      height: 250.h,
+      height: 170.h,
       width: double.infinity,
       child: GridView.builder(
         scrollDirection: Axis.horizontal,
-        padding: const EdgeInsets.all(10),
+        padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 6.h),
         itemCount: adProduct.length,
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 1,
-          mainAxisSpacing: 10,
-          childAspectRatio: 1.4,
+          mainAxisExtent: 120.w,
+          mainAxisSpacing: 8.w,
         ),
         itemBuilder: (context, index) {
           final product = adProduct[index];
 
-          return Stack(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+          return Center(
+            child: SizedBox(
+              width: double.infinity,
+              child: Stack(
                 children: [
-                  Expanded(
-                    child: Image.network(
-                      beautyImages[index],
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                    ),
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(
+                        child: ClipRRect(
+                          child: CustomCacheImage(
+                            imageUrl: beautyImages[index % beautyImages.length],
+                            fit: BoxFit.cover,
+                            height: double.infinity.h,
+                            width: double.infinity.w,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(6.r),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              product.ctaText ?? '',
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(
+                                fontSize: 15.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            SizedBox(height: 3.h),
+                            Text(
+                              product.name,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(fontSize: 10.sp),
+                              textAlign: TextAlign.center,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  Padding(
-                    padding: const EdgeInsets.all(10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          product.ctaText ?? '',
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          product.name,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ],
+                  Positioned(
+                    right: 5,
+                    top: 5,
+                    child: Container(
+                      padding: EdgeInsets.symmetric(horizontal: 5, vertical: 2),
+                      color: Colors.black54,
+                      child: Text(
+                        'AD',
+                        style: TextStyle(color: Colors.white, fontSize: 9.sp),
+                      ),
                     ),
                   ),
                 ],
               ),
-              const Positioned(
-                right: 8,
-                top: 8,
-                child: Chip(
-                  label: Text('AD'),
-                  visualDensity: VisualDensity.compact,
-                ),
-              ),
-            ],
+            ),
           );
         },
       ),

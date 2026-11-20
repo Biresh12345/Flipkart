@@ -5,4 +5,7 @@ abstract class AppRoutes {
   static const category = '/category';
   static const account = '/account';
   static const cart = '/cart';
+  static const minute = '/minute';
+  static const travel = '/travel';
+  static const value365 = '/value365';
 }

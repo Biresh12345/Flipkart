@@ -5,6 +5,8 @@ class ApiService {
   final dio = Dio(
     BaseOptions(
       baseUrl: "https://your-keeper.com/keeper/api/",
+      connectTimeout: const Duration(seconds: 15),
+      receiveTimeout: const Duration(seconds: 15),
       headers: {'Accept': 'application/json'},
     ),
   );

@@ -82,20 +82,34 @@ class _BannerWidgetState extends State<BannerWidget> {
         const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: List.generate(
-            bannerImages.length,
-            (index) => Container(
+          children: List.generate(bannerImages.length, (index) {
+            final isActive = currentIndex == index;
+
+            return Container(
               margin: const EdgeInsets.symmetric(horizontal: 3),
-              width: currentIndex == index ? 18 : 6,
+              width: isActive ? 32 : 6,
               height: 6,
               decoration: BoxDecoration(
-                color: currentIndex == index
-                    ? AppColors.darkBlue
-                    : Colors.grey.shade400,
+                color: Colors.grey.shade400,
                 borderRadius: BorderRadius.circular(10),
               ),
-            ),
-          ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: TweenAnimationBuilder<double>(
+                  tween: Tween<double>(begin: 0, end: isActive ? 1 : 0),
+                  duration: const Duration(seconds: 3),
+                  builder: (context, value, child) {
+                    return LinearProgressIndicator(
+                      value: value,
+                      backgroundColor: Colors.transparent,
+                      valueColor: AlwaysStoppedAnimation(AppColors.darkBlue),
+                      minHeight: 6,
+                    );
+                  },
+                ),
+              ),
+            );
+          }),
         ),
       ],
     );

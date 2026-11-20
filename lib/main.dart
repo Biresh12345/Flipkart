@@ -4,8 +4,11 @@ import 'package:flipkart_clone/screen/account/acoount_screen.dart';
 import 'package:flipkart_clone/screen/cart/cart_screen.dart';
 import 'package:flipkart_clone/screen/category/category_screen.dart';
 import 'package:flipkart_clone/screen/home/home_screen.dart';
+import 'package:flipkart_clone/screen/minutes/minute_screen.dart';
 import 'package:flipkart_clone/screen/play/play_screen.dart';
 import 'package:flipkart_clone/screen/splash/splash_screen.dart';
+import 'package:flipkart_clone/screen/travel/travel_screen.dart';
+import 'package:flipkart_clone/screen/value365/value365_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
@@ -41,7 +44,12 @@ class MyApp extends StatelessWidget {
               page: () => const CategoryScreen(),
             ),
             GetPage(name: AppRoutes.account, page: () => const AcoountScreen()),
-            GetPage(name: AppRoutes.cart, page: () => const CartScreen()),
+            GetPage(name: AppRoutes.minute, page: () => const MinuteScreen()),
+            GetPage(name: AppRoutes.travel, page: () => const TravelScreen()),
+            GetPage(
+              name: AppRoutes.value365,
+              page: () => const Value365Screen(),
+            ),
           ],
         );
       },

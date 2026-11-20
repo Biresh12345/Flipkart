@@ -14,6 +14,8 @@ class HomeController extends GetxController {
 
   RxInt selectedMenu = 0.obs;
 
+  RxInt servicetabIndex = 0.obs;
+
   @override
   void onInit() {
     super.onInit();
@@ -36,6 +38,30 @@ class HomeController extends GetxController {
 
   void selectedCategory(int index) {
     selectedCategoryIndex.value = index;
+  }
+
+  void resetToHome() {
+    selectedCategoryIndex.value = 0;
+    servicetabIndex.value = 0;
+    selectedMenu.value = 0;
+  }
+
+  void selectedService(int index) {
+    servicetabIndex.value = index;
+    switch (index) {
+      case 0:
+        Get.toNamed(AppRoutes.home);
+        break;
+      case 1:
+        Get.toNamed(AppRoutes.minute);
+        break;
+      case 2:
+        Get.toNamed(AppRoutes.travel);
+        break;
+      case 3:
+        Get.toNamed(AppRoutes.value365);
+        break;
+    }
   }
 
   void changeMenu(int index) {

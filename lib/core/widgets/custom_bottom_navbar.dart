@@ -16,7 +16,15 @@ class CustomBottomNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List<IconData> icons = [
+    final List<IconData> selectedIcons = [
+      Icons.home,
+      Icons.play_arrow,
+      Icons.category,
+      Icons.person,
+      Icons.shopping_cart,
+    ];
+
+    final List<IconData> unselectedIcons = [
       Icons.home_outlined,
       Icons.play_arrow_outlined,
       Icons.category_outlined,
@@ -47,24 +55,33 @@ class CustomBottomNavbar extends StatelessWidget {
                   padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 4.w),
                   decoration: BoxDecoration(
                     color: selectedindex
-                        ? AppColors.primary.withValues(alpha: 0.5)
+                        ? Colors.grey.withValues(alpha: 0.3)
                         : Colors.transparent,
-                    borderRadius: BorderRadius.circular(12),
+                    borderRadius: BorderRadius.circular(20),
                   ),
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Icon(
-                        index < icons.length
-                            ? icons[index]
-                            : Icons.circle_outlined,
+                        selectedindex
+                            ? selectedIcons[index]
+                            : unselectedIcons[index],
                         size: 26.w,
+                        color: selectedindex ? AppColors.primary : Colors.black,
                       ),
                       Text(
                         navDetails.label,
                         maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                        style: TextStyle(fontSize: 12.sp),
+                        softWrap: false,
+                        style: TextStyle(
+                          fontSize: selectedindex ? 11.sp : 8.sp,
+                          fontWeight: selectedindex
+                              ? FontWeight.w600
+                              : FontWeight.w500,
+                          color: selectedindex
+                              ? AppColors.primary
+                              : Colors.black,
+                        ),
                       ),
                     ],
                   ),
